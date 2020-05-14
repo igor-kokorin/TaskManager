@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  task_manager_db:
+    container_name: TaskManagerDatabase
+    image: mcr.microsoft.com/mssql/server:2017-CU20-ubuntu-16.04
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 1433:1433
+  task_manager:
+    container_name: TaskManager
+    command: sh -c './wait-for -t 120 task_manager_db:1433 -- dotnet TaskManager.Web.dll'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    links:
+      - task_manager_db:task_manager_db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Release
+      - ASPNETCORE_URLS=http://0.0.0.0:3000
+      - DB_NAME=${DB_NAME}
+      - DB_HOST=task_manager_db
+      - DB_USER_NAME=${DB_USER_NAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 3000:3000
