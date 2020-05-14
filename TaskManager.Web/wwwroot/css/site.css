@@ -1,0 +1,22 @@
+﻿form .ui.button[type=submit] {
+    margin-top: 14px;
+}
+
+#task-tree a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 150px;
+}
+
+.task-display-column {
+    margin-top: -14px;
+}
+
+.task-link {
+    margin-bottom: 5px;
+}
+
+.grid .task-tree {
+    overflow-x: auto;
+    overflow-y: auto;
+}

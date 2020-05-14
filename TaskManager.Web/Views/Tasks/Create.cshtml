@@ -1,0 +1,37 @@
+﻿@model WorkItemCreateDto
+
+@{
+    ViewData["Title"] = "Создать";
+}
+
+<div class="ui center aligned container">
+    <div class="ui basic segment">
+        <form class="ui form" asp-action="SubmitCreate" method="post">
+            <input type="hidden" asp-for="ParentId" value="@Model.ParentId">
+            <div class="field">
+                <label asp-for="Title"></label>
+                <input type="text" asp-for="Title">
+            </div>
+            <div class="field">
+                <label asp-for="Description"></label>
+                <input type="text" asp-for="Description">
+            </div>
+            <div class="field">
+                <label asp-for="Executors"></label>
+                <input type="text" asp-for="Executors">
+            </div>
+            <div class="field">
+                <label asp-for="PlannedExecutionTime"></label>
+                <input type="text" asp-for="PlannedExecutionTime">
+            </div>
+            <div class="field">
+                <label asp-for="ActualExecutionTime"></label>
+                <input type="text" asp-for="ActualExecutionTime">
+            </div>
+            
+            <task-status-selector></task-status-selector>
+
+            <button class="ui button" type="submit">Создать</button>
+        </form>
+    </div>
+</div>

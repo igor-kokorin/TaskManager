@@ -1,0 +1,106 @@
+﻿@model WorkItemDisplayDto
+
+<input type="hidden" value="@Model.Id" />
+
+<a class="ui right floated action-button @(Model.CanDelete ? null : "disabled") button" asp-action="Delete" asp-route-id="@Model.Id">Удалить задачу</a>
+<a class="ui right floated action-button button" asp-action="Edit" asp-route-id="@Model.Id">Редактировать задачу</a>
+<a class="ui right floated action-button button" asp-action="Create" asp-route-parentId="@Model.Id">Создать подзадачу</a>
+
+<div class="ui huge list">
+    <div class="item">
+        <div class="content">
+            <div class="header">@Html.DisplayNameFor(m => m.Title)</div>
+            <div class="description">@Model.Title</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content">
+            <div class="header">@Html.DisplayNameFor(m => m.Description)</div>
+            <div class="description">@Model.Description</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content">
+            <div class="header">@Html.DisplayNameFor(m => m.Executors)</div>
+            <div class="description">@Model.Executors</div>
+        </div>
+    </div>
+    <div class="item">
+        <div class="content">
+            <div class="header">@Html.DisplayNameFor(m => m.Status)</div>
+            <div class="description">@Model.Status.GetDisplayName()</div>
+        </div>
+    </div>
+    @if (Model.EndedAt.HasValue)
+    {
+        <div class="item">
+            <div class="content">
+                <div class="header">@Html.DisplayNameFor(m => m.EndedAt)</div>
+                <div class="description">@Model.EndedAt</div>
+            </div>
+        </div>
+    }
+
+    <div class="item">
+        <div class="content">
+            <div class="header">@Html.DisplayNameFor(m => m.PlannedExecutionTime)</div>
+            <div class="description">@Model.PlannedExecutionTime</div>
+        </div>
+    </div>
+    @if (Model.Children.Count() > 0)
+    {
+        <div class="item">
+            <div class="content">
+                <div class="header">@Html.DisplayNameFor(m => m.TotalPlannedExecutionTime)</div>
+                <div class="description">@Model.TotalPlannedExecutionTime</div>
+            </div>
+            <div class="ui horizontal divided list">
+                @foreach (var child in Model.Children)
+                {
+                    <div class="item">
+                        <div class="content">
+                            <a class="header task-link" asp-action="Display" asp-controller="Tasks" asp-route-id="@child.Id">@child.Title</a>
+                            <div class="description">@child.PlannedExecutionTime</div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="item">
+        <div class="content">
+            <div class="header">@Html.DisplayNameFor(m => m.ActualExecutionTime)</div>
+            <div class="description">@Model.ActualExecutionTime</div>
+        </div>
+    </div>
+    @if (Model.Children.Count() > 0)
+    {
+        <div class="item">
+            <div class="content">
+                <div class="header">@Html.DisplayNameFor(m => m.TotalActualExecutionTime)</div>
+                <div class="description">@Model.TotalActualExecutionTime</div>
+            </div>
+            <div class="ui horizontal divided list">
+                @foreach (var child in Model.Children)
+                {
+                    <div class="item">
+                        <div class="content">
+                            <a class="header task-link" asp-action="Display" asp-controller="Tasks" asp-route-id="@child.Id">@child.Title</a>
+                            <div class="description">@child.ActualExecutionTime</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    
+    <div class="item">
+        <div class="content">
+            <div class="header">@Html.DisplayNameFor(m => m.CreatedAt)</div>
+            <div class="description">@Model.CreatedAt</div>
+        </div>
+    </div>
+</div>

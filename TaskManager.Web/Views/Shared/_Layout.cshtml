@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TaskManager</title>
+    
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/semantic-ui/semantic.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment include="Release">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+</head>
+<body>
+    <div class="ui stackable menu">
+        <a class="item" asp-controller="Tasks" asp-action="Index">Управление задачами</a>
+        <a class="item" asp-controller="Tasks" asp-action="Create">Создать корневую задачу</a>
+    </div>
+
+    @RenderBody()
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/semantic-ui/semantic.js"></script>
+        <script src="~/js/site.js"></script>
+    </environment>
+    <environment include="Release">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+        <script src="~/js/site.js"></script>
+    </environment>
+</body>
+</html>

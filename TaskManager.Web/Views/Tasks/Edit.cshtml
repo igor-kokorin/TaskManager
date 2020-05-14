@@ -1,0 +1,35 @@
+﻿@model WorkItemUpdateDto
+@{
+    ViewData["Title"] = "Редактировать";
+}
+
+<div class="ui center aligned container">
+    <div class="ui basic segment">
+        <form class="ui form" asp-action="SubmitEdit" asp-route-id="@Model.Id" method="post">
+            <div class="field">
+                <label asp-for="Title"></label>
+                <input type="text" asp-for="Title">
+            </div>
+            <div class="field">
+                <label asp-for="Description"></label>
+                <input type="text" asp-for="Description">
+            </div>
+            <div class="field">
+                <label asp-for="Executors"></label>
+                <input type="text" asp-for="Executors">
+            </div>
+            <div class="field">
+                <label asp-for="PlannedExecutionTime"></label>
+                <input type="text" asp-for="PlannedExecutionTime">
+            </div>
+            <div class="field">
+                <label asp-for="ActualExecutionTime"></label>
+                <input type="text" asp-for="ActualExecutionTime">
+            </div>
+
+            <task-status-selector current-value="@Model.Status" allowed-values="@Model.AllowedValues"></task-status-selector>
+
+            <button class="ui button" type="submit">Изменить</button>
+        </form>
+    </div>
+</div>
